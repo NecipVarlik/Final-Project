@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section>
+        <div class="row">
+        <th:block th:if="${session.msg}">
+						<p class="text-center fs-3">[[${session.msg}]]</p>
+						<!-- sayfada session yardımıyla gösterilen mesajın sayfa refresh edildiğinde 
+				veya sayfa tekrar .ağrıldığında sayfadan silenmesini sağlar -->
+						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+        <div class="card mb-3" style="max-width: 500px;" th:each="book : ${books}">
+            <div class="row g-0">
+                <div class="col-sm-3" >
+                    <img th:src="'uploads/' + ${book.image}" class="img-fluid rounded-start" alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${book.title}"></h5>
+                        <p class="card-text" th:text="${book.author}"></p>
+                        <p class="card-text" th:text="${book.publisher}"><small class="text-muted"></small></p>
+                        <a th:href="@{/addtocart/{id} (id=${book.id})}" class="btn btn-primary">Add to the cart</a>                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+        <!--
+        <div class="row">
+            <div class="col-sm-3" th:each="book : ${books}">
+                <div class="card" style="width: 15rem;">
+                    <img class="card-img-top" th:src="'uploads/' + ${book.image}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${book.title}"></h5>
+                        <p class="card-text" th:text="${book.author}"></p>
+                        <p class="card-text" th:text="${book.publisher}"><small class="text-muted"></small></p>
+                        <a href="#" class="btn btn-primary">AddToCard</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})" >
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text = "#{title.userlist}"></title>
+    
+</head>
+
+<body>
+
+    <section>
+        <table class="table table-hover table-striped table-bordered table-warning m-3">
+            <tr>
+                <thead class="table-info">
+                    <th th:text = "#{label.user.name}"> </th>
+                    <th th:text = "#{label.user.surname}"> </th>
+                    <th th:text = "#{label.user.email}"> </th>
+                    <th th:text = "#{label.user.username}"> </th>
+                    <th th:text = "#{label.user.roles}"></th>
+                    <th th:text = "#{label.user.enabled}"> </th>
+                    <th></th>
+                    <th></th>
+                </thead>
+            </tr>
+            <tbody>
+                <tr th:each = "user:${users}">
+                    <td th:text = ${user.name}></td>
+                    <td th:text = ${user.surname}></td>
+                    <td th:text = ${user.email}></td>
+                    <td th:text = ${user.username}></td>
+                    <td th:text="${user.roleList}">Roles</td>
+                    <td><input type="checkbox" th:checked = "${user.enabled}" onclick="return false;"></td>
+                    <td><a class="btn btn-danger" th:text="#{label.delete}" th:href="@{/delete/{id} (id=${user.id})}"
+                        th:data-confirm-delete="|Kullanıcıyı silmek isteidğinize emin misiniz?|"
+                        onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false;"
+                    >Sil</a></td>
+                    <td><a th:href="@{/edit/{id} (id=${user.id})}" th:text="#{label.update}" class="btn btn-primary"></a></td>
+                </tr>
+            </tbody>
+                </table>
+    </section>
+    
+</body>
+
+</html>

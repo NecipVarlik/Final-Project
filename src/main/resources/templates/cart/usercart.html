@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section>
+        
+        <div class="row m-3	">
+        <h1>Sepetim</h1>
+        <th:block th:if="${session.msg}">
+						<p class="text-center fs-3">[[${session.msg}]]</p>
+						<!-- sayfada session yardımıyla gösterilen mesajın sayfa refresh edildiğinde 
+				veya sayfa tekrar .ağrıldığında sayfadan silenmesini sağlar -->
+						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+
+      <!--  <table class="table table-hover table-striped table-bordered table-warning m-3">
+            <tr>
+                <thead class="table-info">
+                    <th>Resim</th>
+                    <th> Kitap Adı</th>
+                    <th>Yazar</th>
+                    <th>Yayın Evi</th>
+                    <th>Satıcı</th>
+                    <th></th>    
+                </thead>
+            </tr>
+            <tbody>
+                <tr th:each="book:${cart.books}">
+                 <td> <img th:src="'uploads/' + ${book.image}" height="60px" /></td>
+                    <td th:text=${book.title}></td>
+                    <td th:text=${book.author}></td>
+                    <td th:text=${book.publisher}></td>
+                    <td th:text="${book.seller.username}"></td>
+                    <td><a class="btn btn-danger" th:href="@{/deletefromcart/{id} (id=${book.id})}"
+                            th:data-confirm-delete="|Ürünü sepetten silmek isteidğinize emin misiniz?|"
+                            onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false;">Sepetten Sil</a></td>
+                </tr>
+            </tbody>
+        </table>  -->
+
+        <div class="card mb-3" style="max-width: 500px;" th:each="book : ${cart.books}">
+            <div class="row g-0">
+                <div class="col-sm-3" >
+                    <img th:src="'uploads/' + ${book.image}" class="img-fluid rounded-start" alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${book.title}"></h5>
+                        <p class="card-text" th:text="${book.author}"></p>
+                        <p class="card-text" th:text="${book.publisher}"><small class="text-muted"></small></p>
+                        <a th:href="@{/deletefromcart/{id} (id=${book.id})}" class="btn btn-danger">Delete from the cart.</a>                   
+                     </div>
+                </div>
+            </div>
+        </div> 
+
+
+	</div>
+		
+    <form th:action="@{/neworder}" th:object="${order}" method="POST" class="form">
+        <div class="row m-3">
+         <h2>Adres Seçimi</h2>
+            <div class="card col-6  m-3" style="width: 18rem;" th:each="useraddress : ${addresses}">
+               
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${useraddress.title}"></h5>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${useraddress.explanation}"></h6>
+                  <p class="card-text" th:text="${useraddress.openAddress}"></p>
+                  <p class="card-subtitle mb-2 text-muted" th:text="${useraddress.province}"></p>
+                  <p class="card-subtitle mb-2 text-muted" th:text="${useraddress.town}"></p> 
+                  <a th:href="@{/addressedit/{id} (id=${useraddress.id})}" th:text="#{label.update}"
+									class="btn btn-primary"></a>       
+                <input class="form-check-input" type="radio" th:field="*{customerAddress}"  th:value="${useraddress.id}">    
+              </div>
+              </div>
+        </div>
+        <a href="/addaddress" class="btn btn-outline-success me-3">Add Address</a>
+        <div class="box-footer m-3">
+            <input type="submit" th:value="#{label.save}" class="btn btn-primary mt-3">
+            
+        </div>
+    </form>
+    </section>
+
+</body>
+
+</html>

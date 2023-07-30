@@ -1,0 +1,31 @@
+2023-05-29 08:45:04.368  INFO 1552 --- [restartedMain] c.n.f.FinalProjectApplication            : Starting FinalProjectApplication using Java 11.0.17 on NeciPC with PID 1552 (C:\Users\necip\eclipse-workspace\final_project\target\classes started by necip in C:\Users\necip\eclipse-workspace\final_project)
+2023-05-29 08:45:04.387  INFO 1552 --- [restartedMain] c.n.f.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2023-05-29 08:45:04.485  INFO 1552 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-29 08:45:04.486  INFO 1552 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-29 08:45:05.903  INFO 1552 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-29 08:45:06.055  INFO 1552 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 122 ms. Found 6 JPA repository interfaces.
+2023-05-29 08:45:07.714  INFO 1552 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-29 08:45:07.751  INFO 1552 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-29 08:45:07.755  INFO 1552 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-29 08:45:07.905  INFO 1552 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-29 08:45:07.906  INFO 1552 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3418 ms
+2023-05-29 08:45:08.226  INFO 1552 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-29 08:45:08.326  INFO 1552 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-05-29 08:45:08.628  INFO 1552 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-29 08:45:08.814  INFO 1552 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-29 08:45:09.216  INFO 1552 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-29 08:45:09.246  INFO 1552 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-05-29 08:45:10.688  INFO 1552 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-29 08:45:10.699  INFO 1552 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-29 08:45:11.926  INFO 1552 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@345e31aa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1e442388, org.springframework.security.web.context.SecurityContextPersistenceFilter@3e1f9b30, org.springframework.security.web.header.HeaderWriterFilter@67249b20, org.springframework.security.web.authentication.logout.LogoutFilter@288992ce, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@9742dfc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@626b627, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3c2722bb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@36f7f671, org.springframework.security.web.session.SessionManagementFilter@70e85419, org.springframework.security.web.access.ExceptionTranslationFilter@20f5a9ec, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2d29acb6]
+2023-05-29 08:45:12.038  WARN 1552 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-29 08:45:12.623  INFO 1552 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-29 08:45:12.686  INFO 1552 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-29 08:45:12.711  INFO 1552 --- [restartedMain] c.n.f.FinalProjectApplication            : Started FinalProjectApplication in 8.96 seconds (JVM running for 9.792)
+2023-05-29 08:45:23.945  INFO 1552 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-29 08:45:23.953  INFO 1552 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-29 08:45:23.962  INFO 1552 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2023-05-29 08:45:24.615  WARN 1552 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [397] milliseconds.
+2023-05-29 08:45:32.585  INFO 1552 --- [http-nio-8080-exec-10] c.n.f.configuration.SecurityConfig       : necip99 , 2023-05-29T08:45:32.585641900 sisteme giriş yaptı.
+2023-05-29 08:45:36.722  INFO 1552 --- [http-nio-8080-exec-7] c.n.f.configuration.SecurityConfig       : necip99 , 2023-05-29T08:45:36.718920300 sistemden çıkış yaptı.
+2023-05-29 08:45:48.428  INFO 1552 --- [http-nio-8080-exec-2] c.n.f.configuration.SecurityConfig       : necip99 , 2023-05-29T08:45:48.428449300 sisteme giriş yaptı.

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+	<title>Registration Title</title>
+</head>
+
+<body>
+	<section>
+		<div class="container mt-5">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<div class="card-header">
+						<h1 class="text-center" th:text="#{title.create}"> </h1>
+					</div>
+					<th:block th:if="${session.msg}">
+						<p class="text-center fs-3">[[${session.msg}]]</p>
+						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+					<div class="card-body">
+						<form th:action="@{/registrate}" th:object="${user}" method="POST" class="form">
+							<div class="form-group col">
+								<label th:text="#{label.user.name}" for="name"> </label>
+								<input type="text" id="name" th:field="*{name}" class="form-control"
+									th:placeholder="#{user.name.placeholder}" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
+									th:errors="*{name}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label th:text="#{label.user.surname}" for="surname"> </label>
+								<input type="text" id="surname" th:field="*{surname}" class="form-control"
+									th:placeholder="#{user.surname.placeholder}" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}"
+									th:errors="*{surname}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label" th:text="#{label.user.email}" for="mail"> </label>
+								<input id="mail" type="email" th:field="*{email}" class="form-control"
+									th:placeholder="#{user.mail.placeholder}" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}"
+									th:errors="*{email}">
+								</div>
+							</div>
+							<div class="from-group">
+								<label class="form-label" th:text="#{label.user.username}" for="username"> </label>
+								<input id="username" type="text" class="form-control"
+									th:placeholder="#{user.username.placeholder}" th:field="*{username}">
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('username')}"
+									th:errors="*{username}"></div>
+							</div>
+
+							<div class="from-group">
+								<label class="form-label" th:text="#{label.user.password}" for="password"> </label>
+								<input type="password" class="form-control" th:placeholder="#{user.name.password}"
+									th:field="*{password}">
+								<div class="alert alert-warning" th:if="${#fields.hasErrors('password')}"
+									th:errors="*{password}"></div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-4 col-form-label">Roles: </label>
+								<div class="col-8">
+									<th:block th:each="role: ${roles}">
+										<input type="radio" th:field="*{roleList}" th:text="${role.description}"
+											th:value="${role.id}" class="m-2" />
+									</th:block>
+								</div>
+							</div>
+							<div class="box-footer">
+								<input type="submit" th:value="#{label.save}" class="btn btn-primary mt-3">
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

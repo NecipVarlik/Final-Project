@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<section>
+
+		<div class="container-fluid m-3">
+			<div class="row">
+				<div class="container justify-content-center card">
+					<div class="card-header">
+						<h1 th:text="#{title.userdetails}" class="text-center"></h1>
+					</div>
+					<th:block th:if="${session.msg}">
+						<p class="text-center fs-3">[[${session.msg}]]</p>
+						<!-- sayfada session yardımıyla gösterilen mesajın sayfa refresh edildiğinde 
+				veya sayfa tekrar .ağrıldığında sayfadan silenmesini sağlar -->
+						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+					<div class="card-body">
+						<form th:object="${user}" class="row g-3">
+							<div class="row">
+								<div class="col-md-6">
+									<label for="name" class="form-label" th:text="#{label.user.name}"></label>
+									<input readonly type="text" class="form-control" id="name"
+										th:placeholder="${user.name}">
+								</div>
+								<div class="col-md-6">
+									<label for="surname" class="form-label" th:text="#{label.user.surname}"></label>
+									<input readonly type="text" class="form-control" id="surname"
+										th:placeholder="${user.surname}">
+								</div>
+								<div class="col-md-6">
+									<label for="email" class="form-label" th:text="#{label.user.email}"></label>
+									<input readonly type="email" class="form-control" id="email"
+										th:placeholder="${user.email}">
+
+								</div>
+								<div class="col-md-6">
+									<label for="username" class="form-label" th:text="#{label.user.username}"></label>
+									<input readonly type="text" class="form-control" id="username"
+										th:placeholder="${user.username}">
+								</div>
+
+								<div class="col-12 m-3">
+
+									<a href="/useredit" class="btn btn-outline-primary me-3">Edit User Details</a>
+									<a href="/addaddress" class="btn btn-outline-success me-3">Add Address</a>
+									<!--<a class="btn btn-outline-warning" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" href="/userlist">Kullanıcı Listesi</a>
+									-->
+									<a href="#" class="btn btn-outline-danger">Change Password</a>
+									
+									
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid mt-5">
+			<div class="row">
+				<th:block th:if="${session.msg}">
+					<p class="text-center fs-3">[[${session.msg}]]</p>
+					<!-- sayfada session yardımıyla gösterilen mesajın sayfa refresh edildiğinde 
+				veya sayfa tekrar .ağrıldığında sayfadan silenmesini sağlar -->
+					<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+				</th:block>
+				<table class="table table-hover table-striped table-bordered table-warning m-3">
+					<tr>
+						<thead class="table-info">
+							<!-- <th th:text = "#{label.user.name}"> </th>
+							<th th:text = "#{label.user.surname}"> </th>
+							<th th:text = "#{label.user.email}"> </th>
+							<th th:text = "#{label.user.username}"> </th>
+							<th th:text = "#{label.user.enabled}"> </th>
+							<th>Actions</th>
+							<th></th> -->
+							<th>Title</th>
+							<th>Open Address</th>
+							<th>Address Explanation</th>
+							<th>Neighborhood</th>
+							<th>Town</th>
+							<th>Province</th>
+							<th>Zip Code</th>
+							<th>Edit</th>
+							<th>Delete</th>
+
+						</thead>
+					</tr>
+					<tbody>
+						<tr th:each="address:${addresses}">
+							<td th:text=${address.title}></td>
+							<td th:text=${address.openAddress}></td>
+							<td th:text=${address.explanation}></td>
+							<td th:text=${address.neighborhood}></td>
+							<td th:text=${address.town}></td>
+							<td th:text=${address.province}></td>
+							<td th:text=${address.zip}></td>
+							<td><a th:href="@{/addressedit/{id} (id=${address.id})}" th:text="#{label.update}"
+									class="btn btn-primary"></a></td>
+							<td><a class="btn btn-danger" th:href="@{/deleteaddress/{id} (id=${address.id})}" th:text="#{label.delete}"
+									th:data-confirm-delete="|Kullanıcıyı silmek isteidğinize emin misiniz?|"
+									onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false;" 
+									 ></a></td>
+
+							<!-- <td><input type="checkbox" th:checked = "${user.enabled}" onclick="return false;"></td>
+							<td><a class="btn btn-danger" th:text="#{label.delete}" th:href="@{/delete/{id} (id=${user.id})}"
+								th:data-confirm-delete="|Kullanıcıyı silmek isteidğinize emin misiniz?|"
+								onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false;"
+							>Sil</a></td>
+							<td><a th:href="@{/edit/{id} (id=${user.id})}" th:text="#{label.update}" class="btn btn-primary"></a></td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+	</section>
+</body>

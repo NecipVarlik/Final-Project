@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section>
+       <!--   <table class="table table-hover table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Resim</th>
+                    <th> Kitap Adı</th>
+                    <th>Yazar</th>
+                    <th>Yayın Evi</th>
+                    <th>Satıcı</th>
+                    <th>Satış Durumu</th>
+                    <th>Eklenme Tarihi</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book:${books}">
+                    <td> <img th:src="'uploads/' + ${book.image}" height="60px" /></td>
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.publisher}"></td>
+                    <td th:text="${book.seller}"></td>
+                    <td th:text="${book.active}"></td>
+                    <td th:text="${book.insertDate}"></td>
+                    <td><a class="btn btn-primary" th:href="@{/updatebook/{id} (id=${book.id})}">Düzenle</a></td>
+                    <td><a class="btn btn-danger" th:href="@{/deletebook/{id} (id=${book.id})}"
+                            th:data-confirm-delete="|Ürünü silmek isteidğinize emin misiniz?|"
+                            onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false;">Sil</a></td>
+                </tr>
+            </tbody>
+        </table> -->
+        
+        <th:block th:if="${session.msg}">
+						<p class="text-center fs-3">[[${session.msg}]]</p>
+						<!-- sayfada session yardımıyla gösterilen mesajın sayfa refresh edildiğinde 
+				veya sayfa tekrar .ağrıldığında sayfadan silenmesini sağlar -->
+						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+
+        <table class="table table-hover table-striped table-bordered table-warning m-3">
+            <tr>
+                <thead class="table-info">
+                                       <th>Resim</th>
+                    <th> Kitap Adı</th>
+                    <th>Yazar</th>
+                    <th>Yayın Evi</th>
+                    <th>Satıcı</th>
+                    <th>Satış Durumu</th>
+                    <th>Eklenme Tarihi</th>
+                    <th></th>
+                    <th></th>
+
+                </thead>
+            </tr>
+            <tbody>
+                <tr th:each="book:${books}">
+                 <td> <img th:src="'uploads/' + ${book.image}" height="60px" /></td>
+                    <td th:text=${book.title}></td>
+                    <td th:text=${book.author}></td>
+                    <td th:text=${book.publisher}></td>
+                    <td th:text="${book.seller.username}"></td>
+                    <td><input type="checkbox" th:checked = "${book.active}" onclick="return false;"></td>
+                    <td th:text="${book.insertDate}"></td>
+                  <td><a class="btn btn-primary" th:href="@{/updatebook/{id} (id=${book.id})}">Düzenle</a></td>
+                    <td><a class="btn btn-danger" th:href="@{/deletebook/{id} (id=${book.id})}"
+                            th:data-confirm-delete="|Ürünü silmek isteidğinize emin misiniz?|"
+                            onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false;">Kaldır</a></td>
+                   
+                    
+                </tr>
+            </tbody>
+        </table> 
+    </section>
+
+</body>
+
+</html>

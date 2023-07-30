@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="container-fluid mt-5 container justify-content-center card">
+                    <div class="card-header">
+                        <h1 th:text="#{title.update}" class="text-center"></h1>
+                    </div>
+                    <th:block th:if="${session.msg}">
+                        <p class="text-center fs-3">[[${session.msg}]]</p>
+                        <!-- sayfada session yardımıyla gösterilen mesajın sayfa refresh edildiğinde 
+				veya sayfa tekrar .ağrıldığında sayfadan silenmesini sağlar -->
+                        <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+                    </th:block>
+                    <div class="card-body">
+                        <form th:action="@{/edit/{id} (id=${user.id})}" th:object="${user}" method="POST" class="form">
+                            <div class="from-group">
+                                <label th:text="#{label.user.name}" for="name"> </label>
+                                <input id="name" type="text" class="form-control" th:field="*{name}" />
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
+                                    th:errors="*{name}">
+                                </div>
+
+                                <div class="from-group">
+                                    <label th:text="#{label.user.surname}" for="surname"> </label>
+                                    <input id="surname" type="text" class="form-control" th:field="*{surname}" />
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}"
+                                        th:errors="*{surname}">
+                                    </div>
+
+                                    <div class="from-group">
+                                        <label th:text="#{label.user.email}" for="email"> </label>
+                                        <input id="email" type="email" class="form-control" th:field="*{email}">
+                                        <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}"
+                                            th:errors="*{email}">
+                                        </div>
+
+                                        <div class="from-group">
+                                            <label th:text="#{label.user.username}" for="username"> </label>
+                                            <input id="username" type="text" class="form-control"
+                                                th:field="*{username}">
+                                            <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}"
+                                                th:errors="*{username}">
+
+                                            </div>
+                                        </div>
+                                        <div class="from-group">
+                                            <th:block th:each="role: ${roles}">
+                                                <input type="checkbox" th:field="*{roleList}"
+                                                    th:text="${role.description}" th:value="${role.id}" class="m-2" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Aktif </label>
+
+                                            <input type="checkbox" th:value="enable" th:field="*{enabled}" name="enabled" th:checked="*{enabled}" />
+                                        </div>
+                                        <div class="box-footer">
+                                            <input type="submit" th:value="#{label.save}" class="btn btn-primary mt-3">
+                                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

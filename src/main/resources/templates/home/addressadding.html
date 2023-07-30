@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <section>
+        <div class="container-fluid mt-5">
+            <div class="row">
+                <div class="container justify-content-center card">
+                    <div class="card-header">
+                        <h1 th:text="#{title.userdetails}" class="text-center"></h1>
+                    </div>
+                    <th:block th:if="${session.msg}">
+                        <p class="text-center fs-3">[[${session.msg}]]</p>
+                        <!-- sayfada session yardımıyla gösterilen mesajın sayfa refresh edildiğinde 
+				veya sayfa tekrar .ağrıldığında sayfadan silenmesini sağlar -->
+                        <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+                    </th:block>
+                    <div class="card-body">
+                        <form th:object="${address}" th:action="@{/addaddress}" method="POST"  class="row g-3">
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <label for="inputTitle" class="form-label">Address Title</label>
+                                    <input th:field="*{title}" type="text" class="form-control" id="inputTitle" placeholder="Apartment, studio, or floor">
+                                  </div>
+                                  <div class="col-12">
+                                    <label for="inputAddress" class="form-label">Address</label>
+                                    <input th:field="*{openAddress}" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                  </div>
+                                  <div class="col-12">
+                                    <label for="inputExplanation" class="form-label">Address Explanation</label>
+                                    <input th:field="*{explanation}" type="text" class="form-control" id="inputExplanation" >
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="inputNeighborhood" class="form-label">Neighborhood</label>
+                                    <input th:field="*{neighborhood}" type="text" class="form-control" id="inputNeighborhood">
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="inputTown" class="form-label">Town</label>
+                                    <input th:field="*{town}" type="text" class="form-control" id="inputTown">
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="inputProvince" class="form-label">City</label>
+                                    <select id="inputProvince" class="form-select" th:field="*{province}">
+                                      <option value="" selected>...Choose...</option>
+                                      <option th:each="p:${T(com.necipvarlik.final_project.entities.Province).values()}"
+                                        th:value="${p}" th:text="${p}"
+                                        ></option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="inputZip" class="form-label">Zip</label>
+                                    <input th:field="*{zip}" type="text" class="form-control" id="inputZip">
+                                  </div>
+                    
+                                  <div class="col-12 mt-3">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                  </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

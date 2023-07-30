@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+	<title>Registration Title</title>
+</head>
+
+<body>
+	<section>
+		<div class="container mt-5">
+			<div class="row">
+				<div class="col-sm-6 container justify-content-center card">
+					<div class="card-header">
+						<h1 class="text-center" th:text="#{title.newbook}"> </h1>
+					</div>
+					<th:block th:if="${session.msg}">
+						<p class="text-center fs-3">[[${session.msg}]]</p>
+						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+					<div class="card-body">
+						<form th:action="@{/updatebook/{id} (id=${book.id})}" th:object="${book}" method="POST" class="form"
+							enctype="multipart/form-data">
+
+							<div class="form-group col">
+								<label th:text="#{label.book.title}" for="title"> </label>
+								<input type="text" id="title" th:field="*{title}" class="form-control"
+									th:placeholder="#{book.title.placeholder}" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('title')}"
+									th:errors="*{title}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label th:text="#{label.book.author}" for="author"> </label>
+								<input type="text" id="author" th:field="*{author}" class="form-control"
+									th:placeholder="#{book.author.placeholder}" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('author')}"
+									th:errors="*{author}">
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label th:text="#{label.book.publisher}" for="publisher"> </label>
+								<input type="text" id="publisher" th:field="*{publisher}" class="form-control"
+									th:placeholder="#{book.publisher.placeholder}" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('publisher')}"
+									th:errors="*{publisher}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label" th:text="#{label.book.image}" for="image"> </label>
+								<input name="img" accept="image/png, image/jpeg" id="image" type="file"
+									class="form-control">
+							</div>
+
+							<div class="form-group">
+								<label class="form-label" th:text="#{label.book.details}" for="details"> </label>
+								<textarea name="details" id="details" cols="30" rows="10" th:field="*{details}"
+									class="form-control" th:placeholder="#{book.details.placeholder}"></textarea>
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('details')}"
+									th:errors="*{details}">
+								</div>
+							</div>
+
+							<!--<div class="form-group">
+								<label class="form-label" th:text="#{label.book.active}" for="active"> </label>
+								<td><input type="checkbox" th:checked="${book.active}"></td>
+							</div>-->
+							
+							<div class="form-group">
+								<label class="form-label" th:text="#{label.book.active}" for="active"> Aktif </label>
+
+								<input type="checkbox" th:field="*{active}" name="active" th:checked="*{active}" />
+							</div>
+
+							<div class="box-footer">
+								<input type="submit" th:value="#{label.save}" class="btn btn-primary mt-3">
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

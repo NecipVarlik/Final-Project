@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<section class="m-5">
+
+    <h1 class="m-3" >Gelen Siparişler</h1>
+	<th:block th:if="${session.msg}">
+						<p class="text-center fs-3">[[${session.msg}]]</p>
+						<!-- sayfada session yardımıyla gösterilen mesajın sayfa refresh edildiğinde 
+				veya sayfa tekrar .ağrıldığında sayfadan silenmesini sağlar -->
+						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+	
+    <div class="row g-0">
+	
+        <div class="col-12" th:each="order: ${orders}">
+        
+            <table class="table table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Resim</th>
+                        <th>Kitap Adı</th>
+                        <th>Yazar</th>
+                        <th>Yayın Evi</th>
+                        <th>Eklenme Tarihi</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book: ${order.books}">
+                        <td> <img th:src="'uploads/' + ${book.image}" height="60px" /></td>
+                        <td th:text="${book.title}"></td>
+                        <td th:text="${book.author}"></td>
+                        <td th:text="${book.publisher}"></td>
+                        <td th:text="${book.insertDate}"></td>
+                    </tr>
+                </tbody>
+
+                <!--
+        <td><a class="btn btn-primary" th:href="@{/urunguncelle/{id} (id=${urun.id})}">Düzenle</a></td>
+                <td><a class="btn btn-danger" th:href="@{/urunsil/{id} (id=${urun.id})}"
+                        th:data-confirm-delete="|Ürünü silmek isteidğinize emin misiniz?|"
+                        onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false;">Sil</a></td>
+                        -->
+
+                <div class="card mb-3" style="max-width: 500px;">
+                    <div class="row g-0">
+                        <div class="col">
+                            <div class="card-body">
+                                <h2 class="card-title"> Müşteri Bilgileri</h2>
+                                <h5 class="card-title" th:text="'Kullanıcı Adı: ' +  ${order.customer.username}">
+                                </h5>
+                                <h5 class="card-title"
+                                    th:text="' Ad ve Soyad: ' + ${order.customer.name} + ' ' + ${order.customer.surname}">
+                                </h5>
+                                <h5 class="card-title" th:text="' Mail:' +  ${order.customer.email}"></h5>
+
+                                <p class="card-text m-0" th:text="'Adres Başlığı ' + ${order.customerAddress.title} ">
+                                </p>
+                                <p class="card-text m-0" th:text="' Şehir: ' + ${order.customerAddress.province}"></p>
+                                <p class="card-text m-0" th:text="' İlçe: ' + ${order.customerAddress.town}"></p>
+
+                                <p class="card-text m-0" th:text="'Mahalle ' + ${order.customerAddress.neighborhood} ">
+                                    <small class="text-muted"></small></p>
+                                <p class="card-text m-0"
+                                    th:text="' Açık adres: ' +  ${order.customerAddress.openAddress}"> <small
+                                        class="text-muted"></small> </p>
+                                <p class="card-text m-0"
+                                    th:text="' Açıklama: ' +  ${order.customerAddress.explanation}"> <small
+                                        class="text-muted"></small> </p>
+                                <p class="card-text m-0" th:text="' Zip kodu: ' +  ${order.customerAddress.zip}"> <small
+                                        class="text-muted"></small> </p>
+                            </div>
+                            <div class="form-check">
+                                <input th:id="${order.id}" class="form-check-input m-3" type="checkbox"
+                                    th:checked="${order.status}" onclick="return false;">
+                                <label th:for="${order.id}" class="form-check-label"> Sipariş Onay Durumu</label>
+                                <a th:href="@{/approveorder/{id} (id=${order.id})}" class="btn btn-primary">Siparişi Onayla</a>
+                                <a th:href="@{/cancelorder/{id} (id=${order.id})}" class="btn btn-danger">Siparişi İptal Et </a>  
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+</html>
